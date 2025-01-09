@@ -16,7 +16,7 @@ export default function UCMFormatter() {
     const flightInfo = segments[0].split('.')
     const flightNumber = flightInfo[0].split('/')[0]
     const date = flightInfo[0].split('/')[1]
-    const registration = flightInfo[2].split('00')[0] // Dynamically extract registration
+    const registration = flightInfo[1] // Dynamically extract registration
 
     // Extract cargo pallet codes (ending with '/C')
     const palletCodes = segments
@@ -38,9 +38,10 @@ export default function UCMFormatter() {
 
   const formatUCM = (flightNumber, date, registration, codes) => {
     const currentDate = new Date()
-    const day = date.slice(0, 2)
-    const month = getMonthAbbreviation(date.slice(2, 4))
-    const year = currentDate.getFullYear().toString().slice(2)
+const day = currentDate.getDate().toString().padStart(2, '0');
+const month = currentDate.toString('').split(' ')[1].toUpperCase();
+
+    
     
     const formattedDateTime = `${flightNumber}/${day}${month}.${registration}.IAD`
     
@@ -58,10 +59,7 @@ export default function UCMFormatter() {
     setFormattedOutput(output)
   }
 
-  const getMonthAbbreviation = (monthNumber) => {
-    const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
-    return months[parseInt(monthNumber) - 1]
-  }
+
 
   return (
     <div className="ucm-formatter">
@@ -93,7 +91,7 @@ export default function UCMFormatter() {
           </button>
           {formattedOutput && (
             <div className="output-group">
-              <h3 className="output-title">Formatted UCM Output (Cargo Only):</h3>
+              <h3 className="output-title">Formatted UCM Output:</h3>
               <pre className="output-content">
                 {formattedOutput}
               </pre>
