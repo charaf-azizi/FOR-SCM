@@ -12,9 +12,9 @@ export default function UCMFormatter() {
 
     // Split the combined input by '-' and filter out empty segments
     const segments = combinedInput.split('-').filter(segment => segment.trim() !== '')
- alert(segments)
+
     const flightInfo = segments[0].split('.')
-    const flightNumber = flightInfo[0].split('/')[0]
+    const flightNumber = flightInfo[0].split(' ')[1].split('/')[0]
     const date = flightInfo[0].split('/')[1]
     const registration = flightInfo[1] // Dynamically extract registration
 
@@ -67,10 +67,10 @@ const month = currentDate.toString('').split(' ')[1].toUpperCase();
         <div className="card-header">
           <h1 className="card-title">
             <span className="emoji" aria-hidden="true">✈️</span>
-            CPM to UCM Formatter (Cargo Only)
+            CPM to UCM Formatter 
           </h1>
           <p className="card-description">
-            Parse CPM messages and format as UCM (Only for cargo pallets)
+            Parse CPM messages and format as UCM 
           </p>
         </div>
         <div className="card-content">
@@ -87,7 +87,7 @@ const month = currentDate.toString('').split(' ')[1].toUpperCase();
             />
           </div>
           <button onClick={parseCPMMessage} className="parse-button">
-            <span className="emoji" aria-hidden="true">📦</span> Parse CPM and Format as UCM (Cargo Only)
+            <span className="emoji" aria-hidden="true">📦</span> Parse CPM and Format as UCM
           </button>
           {formattedOutput && (
             <div className="output-group">
